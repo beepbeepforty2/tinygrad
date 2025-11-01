@@ -171,6 +171,7 @@ dev = [
     "soundfile",
     "onnxruntime",
     "librosa",
+    "opencv-python",
     "pytest",
     "pytest-xdist",
     "pytest-timeout",
