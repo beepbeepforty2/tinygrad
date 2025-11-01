@@ -169,6 +169,8 @@ dev = [
     "tiktoken",
     "onnx",
     "soundfile",
+    "onnxruntime",
+    "librosa",
     "pytest",
     "pytest-xdist",
     "pytest-timeout",
@@ -178,6 +180,14 @@ dev = [
     "numpy",
     "torch==2.9.0",
 ]
+
+[tool.pytest.ini_options]
+norecursedirs = ["extra"]
+timeout = 300
+timeout_method = "thread"
+timeout_func_only = true
+testpaths = ["test"]
+pythonpath = ["."]
 
 [tool.ruff]
 indent-width = 2
