@@ -178,10 +178,12 @@ UOp(Ops.ASSIGN, dtypes.int, arg=None, src=(
       UOp(Ops.UNIQUE, dtypes.void, arg=1, src=()),
        x2,)),)),))
 """
-# ASSIGN has two srcs, src[0] is the BUFFER that's assigned to, and src[1] is the thing to assign
+# AFTER has two srcs, src[0] is the BUFFER that's assigned to, and src[1] is the KERNEL
 # src[1] is the GPU Kernel that's going to be run
 # we can get the ast of the Kernel as follows
-kernel_ast = t_plus_3_plus_4.uop.src[1].arg.ast
+# The structure is RESHAPE -> AFTER, so we need to get src[0] (which is AFTER), then src[1] (which is KERNEL)
+after_node = t_plus_3_plus_4.uop.src[0]  # Get the AFTER node from RESHAPE
+kernel_ast = after_node.src[1].arg.ast
 
 # almost everything in tinygrad functions as a rewrite of the UOps
 # the codegen rewrites the ast to a simplified form ready for "rendering"
